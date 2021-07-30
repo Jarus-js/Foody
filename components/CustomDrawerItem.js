@@ -3,9 +3,9 @@ import { TouchableOpacity, Image, Text } from "react-native";
 
 const CustomDrawerItem = ({
   containerStyle,
+  icon,
   label,
   labelStyle,
-  icon,
   onPress,
   isFocused,
 }) => {
@@ -17,7 +17,7 @@ const CustomDrawerItem = ({
         backgroundColor: isFocused ? "rgba(0, 0, 0, 0.1)" : null,
         height: 40,
         marginBottom: 8,
-        paddingLeft: 12,
+        paddingLeft: 10,
         borderRadius: 8,
         alignItems: "center",
         ...containerStyle,

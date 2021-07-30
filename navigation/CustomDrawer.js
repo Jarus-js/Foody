@@ -28,7 +28,7 @@ const CustomDrawerContent = ({ navigation, selectedTab, userSelectedTab }) => {
       scrollEnabled={true}
       contentContainerStyle={{ flex: 1 }}
     >
-      <View style={{ flex: 1, paddingHorizontal: 12 }}>
+      <View style={{ flex: 1, paddingHorizontal: 10 }}>
         {/* Close */}
         <View>
           <TouchableOpacity onPress={() => navigation.closeDrawer()}>
@@ -39,28 +39,26 @@ const CustomDrawerContent = ({ navigation, selectedTab, userSelectedTab }) => {
           </TouchableOpacity>
         </View>
         {/* Profile */}
-        <View>
-          <TouchableOpacity onPress={() => {}} style={{ flexDirection: "row" }}>
-            <Image
-              source={dummyData.myProfile?.profile_image}
-              style={{ width: 50, height: 50, borderRadius: 12 }}
-            />
-            <View style={{ marginLeft: 5 }}>
-              <Text style={{ color: "#fff", fontSize: 16 }}>
-                {dummyData.myProfile?.name}
-              </Text>
-              <Text style={{ color: "#fff", fontSize: 16 }}>
-                View Your Profile
-              </Text>
-            </View>
-          </TouchableOpacity>
+        <View style={{ flexDirection: "row" }}>
+          <Image
+            source={dummyData.myProfile?.profile_image}
+            style={{ width: 50, height: 50, borderRadius: 12 }}
+          />
+          <View style={{ marginLeft: 10 }}>
+            <Text style={{ color: "#fff", fontSize: 16 }}>
+              {dummyData.myProfile?.name}
+            </Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>
+              View Your Profile
+            </Text>
+          </View>
         </View>
         {/* Drawer item */}
         <View style={{ flex: 1, marginTop: 24 }}>
           <CustomDrawerItem
             label="Home"
             icon={icons.home}
-            onPress={() => userSelectedTab("Home")}
+            onPress={() => userSelectedTab("Home")} //initially selectedTab:'' but selectedTab:'Home'
             isFocused={selectedTab == "Home"}
           />
           <CustomDrawerItem label="My Wallet" icon={icons.wallet} />
@@ -103,6 +101,7 @@ const CustomDrawer = ({ selectedTab, userSelectedTab }) => {
   //state
   const [progress, setProgress] = useState(new Animated.Value(0));
 
+  //Animation
   const scale = Animated.interpolateNode(progress, {
     inputRange: [0, 1],
     outputRange: [1, 0.8], //scale from 1 - 0.8
@@ -126,7 +125,7 @@ const CustomDrawer = ({ selectedTab, userSelectedTab }) => {
           backgroundColor: "transparent",
         }}
         sceneContainerStyle={{ backgroundColor: "transparent" }}
-        //initialRouteName="MainLayout"
+        initialRouteName="MainLayout"
         drawerContent={(props) => {
           setTimeout(() => {
             setProgress(props.progress); //represents current state of drawer i.e open & close
@@ -134,7 +133,7 @@ const CustomDrawer = ({ selectedTab, userSelectedTab }) => {
 
           return (
             <CustomDrawerContent
-              navigation={props.navigation}
+              navigation={props.navigation} //navigation.closeDrawer();
               selectedTab={selectedTab}
               userSelectedTab={userSelectedTab}
             />
